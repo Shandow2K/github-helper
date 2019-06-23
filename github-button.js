@@ -87,10 +87,13 @@
         $directory.each(function(i,dirElm){
             var trElm = dirElm.parentNode.parentNode,
                 cntElm = trElm.querySelector('.content'),
+                cntCssTruncate = cntElm.querySelector('.css-truncate.css-truncate-target'),
+                cntCssTruncateA = cntCssTruncate.querySelector('.js-navigation-open'),
                 cntA = cntElm.querySelector('a'),
                 fileName = cntA.innerText,
-                dirUrl = "https://github.com"+path+'/'+fileName,
+                dirUrl = cntCssTruncateA.href,
                 $a = $('<a></a>');
+
             $a.text('下载');
             $a.attr({class:'fileDownLink','download-url':path+'/'+fileName,'filename':fileName});
             $a.css({cursor:'pointer',visibility:'hidden'});
@@ -98,7 +101,6 @@
             log.logObj('tr',trElm);
             trElm.onmouseover=mouseOverHandler;
             trElm.onmouseout=mouseOutHandler;
-            //$a.on('click',linkClick);
             $a.on('click',function(){
                 var downloadUrl = "https://minhaskamal.github.io/DownGit/#/home?url="+dirUrl;
                 window.open(downloadUrl, "_blank");
