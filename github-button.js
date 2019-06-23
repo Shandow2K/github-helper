@@ -38,7 +38,8 @@
     function createDownLink(){
         //如果不是repository页面则直接返回
         var $files = $('.octicon.octicon-file');
-        if($files.length === 0) return;
+        var $directory = $('.octicon.octicon-file-directory');
+        if($files.length === 0 && $directory.length === 0) return;
         var mouseOverHandler = function(evt){
         // debugTrue();
         var elem = evt.currentTarget,
@@ -61,7 +62,6 @@
             $link.get(0).click();
         };
         
-        
         // debugTrue();
         var origin = location.origin,
             href = location.href,
@@ -83,6 +83,26 @@
             trElm.onmouseover=mouseOverHandler;
             trElm.onmouseout=mouseOutHandler;
             $a.on('click',linkClick);
+        });
+        $directory.each(function(i,dirElm){
+            var trElm = dirElm.parentNode.parentNode,
+                cntElm = trElm.querySelector('.content'),
+                cntA = cntElm.querySelector('a'),
+                fileName = cntA.innerText,
+                dirUrl = "https://github.com"+path+'/'+fileName,
+                $a = $('<a></a>');
+            $a.text('下载');
+            $a.attr({class:'fileDownLink','download-url':path+'/'+fileName,'filename':fileName});
+            $a.css({cursor:'pointer',visibility:'hidden'});
+            cntElm.appendChild($a.get(0));
+            log.logObj('tr',trElm);
+            trElm.onmouseover=mouseOverHandler;
+            trElm.onmouseout=mouseOutHandler;
+            //$a.on('click',linkClick);
+            $a.on('click',function(){
+                var downloadUrl = "https://minhaskamal.github.io/DownGit/#/home?url="+dirUrl;
+                window.open(downloadUrl, "_blank");
+            });
         });
     }
     /**
