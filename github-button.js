@@ -8,7 +8,7 @@
 // @require      https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js
 // @require      https://cdn.bootcss.com/jquery.pjax/1.1.0/jquery.pjax.min.js
 // @require https://greasyfork.org/scripts/53536-ui/code/UI.js?version=281393
-// @author       Ming Ye
+// @author       Ming Ye, sherpahu
 // @match        https://github.com
 // @include      https://github.com/*/*
 // @grant        none
@@ -69,6 +69,7 @@
         if(path.indexOf('tree')<0)
             path += '/tree/master/';
         path = path.replace('tree','raw');
+        //下载单文件
         $files.each(function(i,fileElm){
             var trElm = fileElm.parentNode.parentNode,
                 cntElm = trElm.querySelector('.content'),
@@ -84,6 +85,7 @@
             trElm.onmouseout=mouseOutHandler;
             $a.on('click',linkClick);
         });
+        //下载文件夹
         $directory.each(function(i,dirElm){
             var trElm = dirElm.parentNode.parentNode,
                 cntElm = trElm.querySelector('.content'),
