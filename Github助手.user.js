@@ -8,7 +8,7 @@
 // @require      https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js
 // @require      https://cdn.bootcss.com/jquery.pjax/1.1.0/jquery.pjax.min.js
 // @require https://greasyfork.org/scripts/53536-ui/code/UI.js?version=281393
-// @author       Ming Ye, sherpahu
+// @author       Ming Ye
 // @match        https://github.com
 // @include      https://github.com/*/*
 // @grant        none
@@ -25,11 +25,12 @@
      * @return {[type]} [description]
      */
     function init(){
+        openIssueFromNew();
         createDownLink();
         createCopyLink();
         bindImgClick();
         createFilterPanel();
-        openIssueFromNew();
+        //openIssueFromNew();
     }
     /**
      * 创建下载链接
@@ -69,7 +70,6 @@
         if(path.indexOf('tree')<0)
             path += '/tree/master/';
         path = path.replace('tree','raw');
-        //下载单文件
         $files.each(function(i,fileElm){
             var trElm = fileElm.parentNode.parentNode,
                 cntElm = trElm.querySelector('.content'),
@@ -85,7 +85,6 @@
             trElm.onmouseout=mouseOutHandler;
             $a.on('click',linkClick);
         });
-        //下载文件夹
         $directory.each(function(i,dirElm){
             var trElm = dirElm.parentNode.parentNode,
                 cntElm = trElm.querySelector('.content'),
@@ -109,20 +108,35 @@
             });
         });
     }
+    function openIssueFromNew(){
+        var addr=location.href.substring(19);
+        var tmpArr = location.href.split('/');
+        console.log(addr);
+        if(tmpArr[tmpArr.length - 1].indexOf('ipynb') < 0) return;
+        console.log('There');
+        window.open("https://nbviewer.jupyter.org/github/"+addr);
+    }
     /**
      * issues页面从新标签打开
      * @return {[type]} [description]
      */
+    /*
+    var cnt=0;
     function openIssueFromNew(){
-        var tmpArr = href.split('/');
+        var tmpArr = location.href.split('/');
         if(tmpArr[tmpArr.length - 1].indexOf('issues') < 0) return;
-        $('.issues-listing .js-navigation-container a').on('click',function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            log('this',this);
-            window.open(this.href);
-        });
-    }
+        console.log('There');
+        cnt=cnt+1;
+        if(cnt>1){
+            window.open(location.href);
+        }
+        var test = function(e) {
+            console.log('Here');
+            alert($(e).attr('id'));
+            return false;
+        }
+        $('.js-selected-navigation-item Header-link  mr-3').click(test)
+    }*/
     /**
      * 创建复制链接
      * @return {[type]} [description]

@@ -1,5 +1,10 @@
-# web-script
-个人编写的网页脚本合集
+# github-helper
+改版Github助手
+
+1. 单个文件下载
+2. 单个文件夹下载
+3. 图片放大
+4. ipynb直接使用nbviewer打开
 
 ## link-blank
 超链接从空白标签页打开，点击超链接从空白标签页打开。适合的网站google。
