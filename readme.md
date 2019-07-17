@@ -1,5 +1,6 @@
 # github-helper
-改版Github助手
+改版Github助手  
+https://blog.csdn.net/sherpahu/article/details/95049550
 
 1. 单个文件下载
 2. 单个文件夹下载
